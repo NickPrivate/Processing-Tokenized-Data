@@ -1,18 +1,31 @@
+import keyword
+import nltk
+from modules.preprocessor import Preprocessor
+from modules.file_reader import FileReader
+from modules.tokenizer import Tokenizer
+# nltk.download('punkt')
+
 def tokenize():
 
-    file =  open("input.txt", 'r')
+    file =  "input.txt"
 
-    #print(file.read())
-    spaceFree = ""
+    file_reader = FileReader(file)
+    lines = file_reader.read_file()
 
-    for line in file:
-        if ("#" in line):
-            continue
 
-        spaceFree += "\n"
-        for character in line:
-            if (not character.isspace()):
-                spaceFree += character
-    print(spaceFree)
+    keywords = []
+
+    keywordList = keyword.kwlist
+
+
+    preprocessor = Preprocessor()
+    processed_lines = preprocessor.preprocess(lines)
+
+    # for line in processed_lines:
+    #     print(line)
+
+    tokenizer = Tokenizer()
+    tokens = tokenizer.tokenize(processed_lines)
+
 
 tokenize()
