@@ -15,6 +15,7 @@ class Tokenizer:
         operatorList = []
         keywordList = []
         literalList = []
+        identifierList = []
 
         for line in lines:
             words = line.split()
@@ -26,6 +27,12 @@ class Tokenizer:
                 #with word to ensure they aren't literals
                 if (word in operator and all(word not in lit for lit in literal)):
                     operatorList.append(word)
+
+                if(word.isidentifier() == True and all(word not in lit for lit in literal)):
+                    identifierList.append(word)
+
+                if (word.isdigit() == True):
+                    literalList.append(word)
             # inside .finall what it's doing is finding the substrings inside strings that have ""
 
             #I need to use .extend because adds the specified list elements (or any iterable) to the end of the current list rather
@@ -37,5 +44,6 @@ class Tokenizer:
         print("Keywords: ", keywordList)
         print("Literals: ", literalList)    
         print("Operators: ", operatorList)
+        print("Identifiers: ", identifierList)
 
         return 1
