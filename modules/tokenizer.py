@@ -10,17 +10,22 @@ class Tokenizer:
         list = keyword.kwlist 
         # print(list)
 
+
+        delimiter = [':',',',';', ' ', '()']
+
         operator = ['+', '-', '*', '%', '/', '**', '//', '=', '+=', '-=', '*=', '/=', '%=', '//=', '**=', '&=', '|=', '^=','>>=', '<<=', '==', '!=', '<', '>', '<=', '>=', 'and', 'or', 'not', '<<', '>>','&', 'is', 'not']
 
         operatorList = []
         keywordList = []
         literalList = []
         identifierList = []
+        separatorList = []
 
         for line in lines:
             words = line.split()
             literal = (re.findall('"([^"]*)"', line))
             for word in words:
+                print("Before: ",word)
                 if (word in list and all(word not in lit for lit in literal)):
                     keywordList.append(word)
                 #This part (word not in lit for lit in literal) is iterating through the list of literals and checking each one 
@@ -28,11 +33,15 @@ class Tokenizer:
                 if (word in operator and all(word not in lit for lit in literal)):
                     operatorList.append(word)
 
-                if(word.isidentifier() == True and all(word not in lit for lit in literal)):
+                if(word.isidentifier() == True and word not in keyword.kwlist and all(word not in lit for lit in literal)):
                     identifierList.append(word)
+
+                if(word in delimiter and all(word not in lit for lit in literal) and word not in separatorList):
+                    separatorList.append(word)
 
                 if (word.isdigit() == True):
                     literalList.append(word)
+                print("After: ",word)
             # inside .finall what it's doing is finding the substrings inside strings that have ""
 
             #I need to use .extend because adds the specified list elements (or any iterable) to the end of the current list rather
@@ -45,5 +54,6 @@ class Tokenizer:
         print("Literals: ", literalList)    
         print("Operators: ", operatorList)
         print("Identifiers: ", identifierList)
+        print("Separators: ", separatorList)
 
         return 1
