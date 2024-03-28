@@ -1,10 +1,14 @@
-# Requirements:
+## Requirements:
 - Python 3
 
-### Install Python here:
-######  https://www.python.org/downloads/
-# 
+## Install Python here:
+######
+- https://www.python.org/downloads/
 
+## Dependencies:
+- ```pip install tabulate```
+- ```pip install nltk```
+#
 ### Run program on Unix:
 cd to where the file is located then type
 - ```python3 main.py```
@@ -14,7 +18,7 @@ cd to where the file is located then type
 - ```python main.py```
 
 ## Overview
-main.py initializes the script by importing the modules used to tokenize the data. Each module contains as function that handles handles the data. This modular approach allows for easier integration and expansion.
+main.py initializes the script by importing the modules used to tokenize the data. Each module contains a function that handles the data. This modular approach allows for easier integration and expansion.
 
 ## Functionality:
 - file_reader.py
