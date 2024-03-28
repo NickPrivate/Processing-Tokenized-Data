@@ -13,13 +13,16 @@ class OutputFormatter:
         identifiers = ', '.join(identifiers)
         separators = ', '.join(separators)
 
+        total_tokens_count = sum([len(keywords.split(', ')), len(literals.split(', ')), len(operators.split(', ')), len(identifiers.split(', ')), len(separators.split(', '))])
+
 
         table = [
             ['Keywords', keywords],
             ['Literals', literals],
             ['Operators', operators],
             ['Identifiers', identifiers],
-            ['Separators', separators]
+            ['Separators', separators],
+            ['Total Tokens', total_tokens_count]
         ]
         print(tabulate(table, headers=['Category', 'Tokens'], tablefmt='fancy_grid'))
         pass
