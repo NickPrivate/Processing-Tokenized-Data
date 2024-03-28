@@ -1,6 +1,6 @@
 #Just a test lets see if it works
 
-def test():
+def test () :
 
     string1 = "If we take "
     x = 10

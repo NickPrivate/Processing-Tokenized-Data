@@ -15,8 +15,8 @@ def output():
     processed_lines = preprocessor.preprocess(lines)
 
     tokenizer = Tokenizer()
-    keywords, literals, operators, identifiers = tokenizer.tokenize(processed_lines)
+    keywords, literals, operators, identifiers, separators = tokenizer.tokenize(processed_lines)
 
-    OutputFormatter().output(processed_lines, keywords, literals, operators, identifiers)
+    OutputFormatter().output(processed_lines, keywords, literals, operators, identifiers, separators)
 
 output()
