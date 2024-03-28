@@ -1,9 +1,19 @@
-# This is a sample code
-# It adds two numbers
+#Just a test lets see if it works
 
-    def add(a, b):
-        # Add two numbers
-    result = a + b
-    return result
-        # Test the function
-    print(add(5, 3))
+def test () :
+
+    string1 = "If we take "
+    x = 10
+    string2 = " and add it to "
+    y = 5
+    string3 = " we will get "
+
+    z = x + y
+
+    output = string1 + str(x) + string2 + str(y) + string3 + str(z)
+
+    #this should print
+
+    print(output)
+
+test()
