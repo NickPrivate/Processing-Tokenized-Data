@@ -1,19 +1,21 @@
-import keyword 
+import keyword
 import re
 
 class Tokenizer:
-
     def tokenize(self, lines):
-        # for line in lines:
-        #     print(line)
+        # Step 3 Tokenize the preprocessed lines, set up data for the output
+        kwlist = keyword.kwlist
 
-        list = keyword.kwlist 
-        # print(list)
+        pattern = r"""
+            (?:==|!=|<=|>=|\+\+|--|\+=|-=|\*=|/=|//=|%=|&=|\|=|\^=|>>=|<<=|\*\*=?|&&|\|\||<<|>>|&|\||\^|\+|-|\*|/|%|=|<|>|!|~) | # Operators
+            "[^"\\]*(?:\\.[^"\\]*)*" |      # Double quoted string literals
+            '[^'\\]*(?:\\.[^'\\]*)*' |      # Single quoted string literals
+            \b[a-zA-Z_][a-zA-Z0-9_]*\b |    # Identifiers including keywords
+            \d+\.\d+ | \d+ |                # Numeric literals (floats and integers)
+            [:;,\(\)]                       # Separators, capture each character separately
+        """
 
-
-        delimiter = [':',',',';', ' ', '()']
-
-        operator = ['+', '-', '*', '%', '/', '**', '//', '=', '+=', '-=', '*=', '/=', '%=', '//=', '**=', '&=', '|=', '^=','>>=', '<<=', '==', '!=', '<', '>', '<=', '>=', 'and', 'or', 'not', '<<', '>>','&', 'is', 'not']
+        regex = re.compile(pattern, re.VERBOSE)
 
         operatorList = []
         keywordList = []
@@ -22,73 +24,17 @@ class Tokenizer:
         separatorList = []
 
         for line in lines:
-            words = line.split()
-            literal = (re.findall('"([^"]*)"', line))
-            for word in words:
-                #print("Before: ",word)
-                if (word in list and all(word not in lit for lit in literal)):
-                    keywordList.append(word)
-                #This part (word not in lit for lit in literal) is iterating through the list of literals and checking each one 
-                #with word to ensure they aren't literals
-                if (word in operator and all(word not in lit for lit in literal)):
-                    operatorList.append(word)
-
-                if(word.isidentifier() == True and word not in keyword.kwlist and all(word not in lit for lit in literal)):
-                    identifierList.append(word)
-
-                if(word in delimiter and all(word not in lit for lit in literal) and word not in separatorList):
-                    separatorList.append(word)
-
-                if (word.isdigit() == True):
-                    literalList.append(word)
-                #print("After: ",word)
-            # inside .finall what it's doing is finding the substrings inside strings that have ""
-
-            #I need to use .extend because adds the specified list elements (or any iterable) to the end of the current list rather
-            # than add the entire iterable as a single element to the end of the list.
-            literalList.extend(literal)
+            tokens = regex.findall(line)
+            for token in tokens:
+                if token in kwlist:
+                    keywordList.append(token)
+                elif re.match(r"""(?:==|!=|<=|>=|\+\+|--|\+=|-=|\*=|/=|//=|%=|&=|\|=|\^=|>>=|<<=|\*\*=?|&&|\|\||<<|>>|&|\||\^|\+|-|\*|/|%|=|<|>|!|~)""", token):
+                    operatorList.append(token)
+                elif token in ['(', ')', ':', ',', ';']:
+                    separatorList.append(token)
+                elif token.startswith(('"', "'")) or token.isdigit():
+                    literalList.append(token)
+                elif token.isidentifier():
+                    identifierList.append(token)
 
         return keywordList, literalList, operatorList, identifierList, separatorList
-
-'''import keyword 
-import re
-
-class Tokenizer:
-
-    def tokenize(self, lines):
-        # for line in lines:
-        #     print(line)
-
-        list = keyword.kwlist 
-        # print(list)
-
-        operator = ['+', '-', '*', '%', '/', '**', '//', '=', '+=', '-=', '*=', '/=', '%=', '//=', '**=', '&=', '|=', '^=','>>=', '<<=', '==', '!=', '<', '>', '<=', '>=', 'and', 'or', 'not', '<<', '>>','&', 'is', 'not']
-
-        operatorList = []
-        keywordList = []
-        literalList = []
-        identifierList = []
-
-        for line in lines:
-            words = line.split()
-            literal = (re.findall('"([^"]*)"', line))
-            for word in words:
-                if (word in list and all(word not in lit for lit in literal)):
-                    keywordList.append(word)
-                #This part (word not in lit for lit in literal) is iterating through the list of literals and checking each one 
-                #with word to ensure they aren't literals
-                if (word in operator and all(word not in lit for lit in literal)):
-                    operatorList.append(word)
-
-                if(word.isidentifier() == True and all(word not in lit for lit in literal)):
-                    identifierList.append(word)
-
-                if (word.isdigit() == True):
-                    literalList.append(word)
-            # inside .finall what it's doing is finding the substrings inside strings that have ""
-
-            #I need to use .extend because adds the specified list elements (or any iterable) to the end of the current list rather
-            # than add the entire iterable as a single element to the end of the list.
-            literalList.extend(literal)
-
-        return keywordList, literalList, operatorList, identifierList'''

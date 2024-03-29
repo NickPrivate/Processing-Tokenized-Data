@@ -1,7 +1,7 @@
 from tabulate import tabulate
 
 class OutputFormatter:
-    #Step 4 formats and prints the code and tokenized output in a nice format
+    # Step 4 formats and prints the code and tokenized output in a nice format
     def output(self, lines, keywords, literals, operators, identifiers, separators):
         for line in lines:
             print(line)

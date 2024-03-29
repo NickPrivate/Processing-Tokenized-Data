@@ -4,7 +4,6 @@ from modules.preprocessor import Preprocessor
 from modules.file_reader import FileReader
 from modules.tokenizer import Tokenizer
 from modules.output_formatter import OutputFormatter
-# nltk.download('punkt')
 
 def output():
     file = "input.txt"

@@ -1,19 +1,16 @@
-#Just a test lets see if it works
+###################################
+# Put any Test Case in this File  #
+###################################
 
-def test () :
+# This is a sample code
+# It adds two numbers
 
-    string1 = "If we take "
-    x = 10
-    string2 = " and add it to "
-    y = 5
-    string3 = " we will get "
+def add(a, b):
 
-    z = x + y
+# Add two numbers
+    result = a + b
 
-    output = string1 + str(x) + string2 + str(y) + string3 + str(z)
+    return result
 
-    #this should print
-
-    print(output)
-
-test()
+# Test the function
+print(add(5, 3))
