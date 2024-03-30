@@ -1,3 +1,8 @@
+## Contributors:
+- Ryan Haddadi
+- Nicholas Goulart
+- Anthony LaPan
+
 ## Requirements:
 - Python 3
 
@@ -31,9 +36,4 @@ main.py initializes the script by importing the modules used to tokenize the dat
   - Formats the tokenized data into a table for easy readability.
 
 ## Test Cases
-Included is a test case that it automatically called upon running the script. The output is a formatted table with the Lexeme, Token, and Count.
-
-## Contributors:
-- Ryan Haddadi
-- Nicholas Goulart
-- Anthony LaPan
+Included in the "test" directory is "input.txt" a test case that is automatically called upon running the script. Feel free to put any kind of test case in this file, save the file, and run main.py.
